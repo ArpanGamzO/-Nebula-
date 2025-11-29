@@ -1,0 +1,262 @@
+<!--
+NEBULΔ ™ Dashboard - index.html
+Single-file HTML (Tailwind CDN + GSAP) ready to push to GitHub and deploy on Vercel.
+
+How to use:
+1. Put your bot logo at /public/logo.png (or edit the <img> src to point to your logo file).
+2. Commit this file to a repo on GitHub. If using Vercel, point the project to that repo and deploy (Vercel will serve index.html automatically).
+3. Update invite & support links if needed.
+
+Notes:
+- Theme: pure black background; all text and emojis are white. No glow effects.
+- Animations use GSAP (CDN). Tailwind via CDN for quick styling.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>N E B U L Δ ™ — Dashboard</title>
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- Simple AOS-like behaviour with IntersectionObserver + GSAP (no external AOS required) -->
+
+  <style>
+    :root{--bg:#000000;--white:#ffffff}
+    html,body{background:var(--bg);color:var(--white);height:100%}
+
+    /* Ensure all text & emoji white and remove default glows */
+    *{color:var(--white)}
+    a,button{outline:none}
+
+    /* Subtle card background (very dark) */
+    .card{background:rgba(255,255,255,0.03);border-radius:12px;padding:1rem}
+
+    /* Buttons */
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.12);padding:.6rem 1rem;border-radius:10px;cursor:pointer}
+    .btn:hover{transform:scale(1.03)}
+
+    /* No glow: prevent text shadows */
+    *{text-shadow:none!important}
+
+    /* Accent underline on nav hover */
+    .nav-link{position:relative}
+    .nav-link::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--white);transition:width .25s}
+    .nav-link:hover::after{width:100%}
+
+    /* Mobile menu overrides */
+    .mobile-menu{background:rgba(255,255,255,0.02);backdrop-filter: blur(4px)}
+
+    /* Simple floating animation keyframes for subtle effect */
+    @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+    .floaty{animation:floaty 6s ease-in-out infinite}
+  </style>
+</head>
+<body class="font-sans leading-normal tracking-normal">
+
+  <!-- NAVBAR -->
+  <nav class="w-full sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="/public/logo.png" alt="NEBULΔ logo" class="w-12 h-12 object-contain rounded-md"/>
+        <div>
+          <div class="text-xl font-bold">N E B U L Δ ™</div>
+          <div class="text-xs opacity-80">Next-Gen Multipurpose Discord Bot</div>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-6">
+        <a class="nav-link" href="#features">Features</a>
+        <a class="nav-link" href="#commands">Commands</a>
+        <a class="nav-link" href="#support">Support</a>
+        <a class="nav-link" href="#invite">Invite</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1434857888081248287" class="btn">Invite Bot</a>
+      </div>
+
+      <!-- mobile hamburger -->
+      <div class="md:hidden">
+        <button id="hamburger" class="btn">Menu</button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-6 pb-4">
+      <div class="mobile-menu p-4 rounded-md flex flex-col gap-3">
+        <a href="#features">Features</a>
+        <a href="#commands">Commands</a>
+        <a href="#support">Support</a>
+        <a href="#invite">Invite</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1434857888081248287" class="btn">Invite Bot</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center gap-10">
+    <div class="flex-1">
+      <div class="text-5xl md:text-6xl font-extrabold leading-tight">N E B U L Δ ™</div>
+      <p class="mt-4 text-lg opacity-90">A Next-Gen Multipurpose Discord Bot — fast, secure and easy to use.</p>
+
+      <div class="mt-6 flex gap-4">
+        <a href="https://discord.com/oauth2/authorize?client_id=1434857888081248287" class="btn">🟢 Invite Bot</a>
+        <a href="https://dc.gg/nebula-support" class="btn">💬 Join Support</a>
+      </div>
+
+      <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-md">
+        <div class="card">🛡️ Antinuke System</div>
+        <div class="card">🔨 Moderation System</div>
+        <div class="card">🎉 Giveaway System</div>
+        <div class="card">🧰 Utilities Module</div>
+        <div class="card">🎫 Ticket System</div>
+      </div>
+    </div>
+
+    <div class="flex-1 flex justify-center md:justify-end">
+      <div class="w-64 h-64 rounded-2xl flex items-center justify-center floaty card">
+        <img src="/public/logo.png" alt="NEBULΔ logo big" class="w-40 h-40 object-contain"/>
+      </div>
+    </div>
+  </header>
+
+  <!-- FEATURES -->
+  <section id="features" class="max-w-6xl mx-auto px-6 py-12">
+    <h2 class="text-3xl font-bold mb-6">Features</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="card p-6" data-animate>
+        <h3 class="text-xl font-semibold">🛡️ Antinuke System</h3>
+        <p class="mt-2 text-sm opacity-90">Protect your server from raids and mass role/channel deletions. Auto-lockdown & trusted roles.</p>
+      </article>
+
+      <article class="card p-6" data-animate>
+        <h3 class="text-xl font-semibold">🔨 Moderation System</h3>
+        <p class="mt-2 text-sm opacity-90">Kick, ban, mute, warn & logs with powerful filters and automoderation.</p>
+      </article>
+
+      <article class="card p-6" data-animate>
+        <h3 class="text-xl font-semibold">🎉 Giveaway System</h3>
+        <p class="mt-2 text-sm opacity-90">Easy giveaways with reactions, dropdown winners and time-based scheduling.</p>
+      </article>
+
+      <article class="card p-6" data-animate>
+        <h3 class="text-xl font-semibold">🧰 Utilities Module</h3>
+        <p class="mt-2 text-sm opacity-90">Role menus, server stats, reminders, polls, and more helpful utilities for communities.</p>
+      </article>
+
+      <article class="card p-6" data-animate>
+        <h3 class="text-xl font-semibold">🎫 Ticket System</h3>
+        <p class="mt-2 text-sm opacity-90">Simple support tickets with transcripts, categories and staff controls.</p>
+      </article>
+
+      <article class="card p-6" data-animate>
+        <h3 class="text-xl font-semibold">⚡ Fast & Reliable</h3>
+        <p class="mt-2 text-sm opacity-90">Built for uptime and efficiency — optimized for modern servers.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- COMMANDS (Accordion) -->
+  <section id="commands" class="max-w-6xl mx-auto px-6 py-12">
+    <h2 class="text-3xl font-bold mb-6">Commands</h2>
+
+    <div class="space-y-3">
+      <!-- Accordion item -->
+      <details class="card" data-animate>
+        <summary class="cursor-pointer text-lg font-semibold">🛡️ Antinuke Commands</summary>
+        <div class="mt-3 text-sm opacity-90">`/antinuke enable`, `/antinuke config`, `/antinuke logs` — configure lockdown, trusted roles and webhook alerts.</div>
+      </details>
+
+      <details class="card" data-animate>
+        <summary class="cursor-pointer text-lg font-semibold">🔨 Moderation Commands</summary>
+        <div class="mt-3 text-sm opacity-90">`/ban`, `/kick`, `/mute`, `/warn`, `/modlog` — simple and powerful moderation tools.</div>
+      </details>
+
+      <details class="card" data-animate>
+        <summary class="cursor-pointer text-lg font-semibold">🎉 Giveaway Commands</summary>
+        <div class="mt-3 text-sm opacity-90">`/giveaway start`, `/giveaway end`, `/giveaway reroll` — easy giveaways with interactive controls.</div>
+      </details>
+
+      <details class="card" data-animate>
+        <summary class="cursor-pointer text-lg font-semibold">🧰 Utilities</summary>
+        <div class="mt-3 text-sm opacity-90">`/poll`, `/remind`, `/role menu`, `/serverstats` — tools to manage and engage your community.</div>
+      </details>
+
+      <details class="card" data-animate>
+        <summary class="cursor-pointer text-lg font-semibold">🎫 Ticket System</summary>
+        <div class="mt-3 text-sm opacity-90">`/ticket open`, `/ticket close`, `/ticket transcript` — support tickets with easy setup.</div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section id="support" class="max-w-6xl mx-auto px-6 py-12">
+    <h2 class="text-3xl font-bold mb-6">Support & Resources</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div class="card p-6" data-animate>
+        <h3 class="font-semibold">💬 Support Server</h3>
+        <p class="mt-2 text-sm opacity-90">Join our official support server for help, guides and announcements.</p>
+        <div class="mt-4"><a href="https://dc.gg/nebula-support" class="btn">Join Support</a></div>
+      </div>
+
+      <div class="card p-6" data-animate>
+        <h3 class="font-semibold">📚 Documentation</h3>
+        <p class="mt-2 text-sm opacity-90">Full docs & command reference (placeholder). Create a docs site or link to GitHub README.</p>
+        <div class="mt-4"><a class="btn">Open Docs</a></div>
+      </div>
+
+      <div class="card p-6" data-animate>
+        <h3 class="font-semibold">🔗 GitHub</h3>
+        <p class="mt-2 text-sm opacity-90">Source code, issues and contribution guide.</p>
+        <div class="mt-4"><a class="btn">View on GitHub</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVITE SECTION -->
+  <section id="invite" class="max-w-6xl mx-auto px-6 py-12 text-center">
+    <div class="card inline-block p-8">
+      <h3 class="text-2xl font-bold">Ready to add N E B U L Δ ™ to your server?</h3>
+      <p class="mt-3 opacity-90">Click invite to authorize the bot. Visit support if you need help.</p>
+      <div class="mt-6 flex items-center justify-center gap-4">
+        <a href="https://discord.com/oauth2/authorize?client_id=1434857888081248287" class="btn">🟢 Invite Bot</a>
+        <a href="https://dc.gg/nebula-support" class="btn">💬 Support Server</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="max-w-6xl mx-auto px-6 py-8 text-center opacity-90">
+    <div>© <span id="year"></span> N E B U L Δ ™ — Built with care.</div>
+  </footer>
+
+  <script>
+    // Small utilities: mobile menu toggle, year, simple animations using GSAP + IntersectionObserver
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const ham = document.getElementById('hamburger');
+    const mob = document.getElementById('mobileMenu');
+    ham && ham.addEventListener('click', ()=>{mob.classList.toggle('hidden')});
+
+    // GSAP reveal on scroll (simple)
+    const animateEls = document.querySelectorAll('[data-animate]');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          gsap.fromTo(entry.target,{y:20,opacity:0},{y:0,opacity:1,duration:0.6,stagger:0.08});
+          io.unobserve(entry.target);
+        }
+      })
+    },{threshold:0.15});
+    animateEls.forEach(el=>io.observe(el));
+
+    // Small hero intro animation
+    gsap.from('.font-extrabold',{y:20,opacity:0,duration:0.8,stagger:0.04});
+  </script>
+</body>
+</html>
